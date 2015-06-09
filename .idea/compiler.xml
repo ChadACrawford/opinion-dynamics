@@ -25,6 +25,8 @@
         <module name="opinion_dynamics" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="opinion_dynamics" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
-

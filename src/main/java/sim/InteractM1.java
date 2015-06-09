@@ -12,12 +12,10 @@ public class InteractM1 implements Interact {
         this.DELTA = DELTA;
     }
 
-    @Override
     public double opinionDiff(Agent a, Agent b) {
         return 0;
     }
 
-    @Override
     public IndepedentVariable updateValue(Independent I, double V) {
         if(I == Independent.EPSILON) return new InteractM1(V, MU, DELTA);
         else if(I == Independent.MU) return new InteractM1(EPSILON, V, DELTA);

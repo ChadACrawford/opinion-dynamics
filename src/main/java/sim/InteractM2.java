@@ -12,7 +12,6 @@ public class InteractM2 implements Interact {
         this.DELTA = DELTA;
     }
 
-    @Override
     public double opinionDiff(Agent a, Agent b) {
         double opA = a.getOpinion(), opB = b.getOpinion();
         double odiff = opB-opA;
@@ -34,7 +33,6 @@ public class InteractM2 implements Interact {
             return 0;
     }
 
-    @Override
     public IndepedentVariable updateValue(Independent I, double V) {
         if(I == Independent.EPSILON) return new InteractM2(V, MU, DELTA);
         else if(I == Independent.MU) return new InteractM2(EPSILON, V, DELTA);

@@ -27,7 +27,6 @@ public abstract class NetworkGenerator implements IndepedentVariable {
         for(int i = 0; i < E; i++) {
             Agent n1,n2;
             n1 = Collections.min(A, new Comparator<Agent>() {
-                @Override
                 public int compare(Agent o1, Agent o2) {
                     return N.degree(o1) > N.degree(o2) ? 1:-1;
                 }
@@ -116,7 +115,6 @@ public abstract class NetworkGenerator implements IndepedentVariable {
             return N;
         }
 
-        @Override
         public IndepedentVariable updateValue(Independent I, double V) {
             if(I == Independent.DEGREE) return new NGRandom((int)V);
             else return new NGRandom(D);
@@ -138,7 +136,6 @@ public abstract class NetworkGenerator implements IndepedentVariable {
             return N;
         }
 
-        @Override
         public IndepedentVariable updateValue(Independent I, double V) {
             return new NGScaleFree(M);
         }
@@ -159,7 +156,6 @@ public abstract class NetworkGenerator implements IndepedentVariable {
             return N;
         }
 
-        @Override
         public IndepedentVariable updateValue(Independent I, double V) {
             return new NGSmallWorld(K,B);
         }
@@ -178,7 +174,6 @@ public abstract class NetworkGenerator implements IndepedentVariable {
             return N;
         }
 
-        @Override
         public IndepedentVariable updateValue(Independent I, double V) {
             return new NGGroup(K);
         }
@@ -190,7 +185,6 @@ public abstract class NetworkGenerator implements IndepedentVariable {
             return new CompleteNetwork(C, rand);
         }
 
-        @Override
         public IndepedentVariable updateValue(Independent I, double V) {
             return new NGComplete();
         }

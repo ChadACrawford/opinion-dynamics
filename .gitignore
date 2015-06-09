@@ -1,0 +1,8 @@
+data/sim_*
+bin/
+tmp/
+.settings/
+local.properties
+.loadpath
+target/*
+opinion_dynamics.iml
