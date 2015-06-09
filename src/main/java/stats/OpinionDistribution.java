@@ -48,25 +48,14 @@ public class OpinionDistribution extends StatModule {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Runtime rt = Runtime.getRuntime();
-        try {
-            String[] command = new String[] {
-                    "cmd",
-                    "/C",
-                    "start",
-                    "gnuplot",
-                    "-e",
-                    String.format("\"outfile='%s';infile='%s';independent='%s';\"",
-                            stats.getDataFolder()+"opinion_distribution",
-                            stats.getDataFolder()+"opinion_distribution.dat",
-                            stats.indp.toString()),
-                    "data/opinion_distribution.plt"
-            };
-            //Debug.println(1, Arrays.toString(command));
-            rt.exec(command);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
+        String[][] args = new String[][] {
+                new String[] {"outfile", stats.getDataFolder()+"opinion_distribution"},
+                new String[] {"infile", stats.getDataFolder()+"opinion_distribution.dat"},
+                new String[] {"independent", stats.indp.toString()}
+        };
+        Gnuplot.plotFile("opinion_distribution.plt", args);
+
         System.out.println("Done!");
     }
 
