@@ -14,7 +14,7 @@ public class InteractM2 implements Interact {
 
     public double opinionDiff(Agent a, Agent b) {
         double opA = a.getOpinion(), opB = b.getOpinion();
-        double odiff = opB-opA;
+        double odiff = Math.abs(opB-opA);
         if(odiff <= EPSILON)
             return MU*(opB-opA);
         else if(opA <= DELTA && opB >= 1-DELTA) {

@@ -30,28 +30,28 @@ public abstract class Simulator {
         return T;
     }
     public void interact(Agent a, Agent b) {
-        if(Math.abs(0.5-a.getOpinion())>Math.abs(0.5-b.getOpinion())) {
-            Agent t = b;
-            b = a;
-            a = t;
-        }
+//        if(Math.abs(0.5-a.getOpinion())>Math.abs(0.5-b.getOpinion())) {
+//            Agent t = b;
+//            b = a;
+//            a = t;
+//        }
 
         double odA = I.opinionDiff(a,b);
-        //double odB = I.opinionDiff(b,a);
+        double odB = I.opinionDiff(b,a);
         if(odA == 0) return;
         rI += 1;
         tOpinionDifference += Math.abs(odA);//+odB;
         if(odA > maxOpinionDifference) maxOpinionDifference = odA;
-        //if(odB > maxOpinionDifference) maxOpinionDifference = odB;
+        if(odB > maxOpinionDifference) maxOpinionDifference = odB;
         if(odA < minOpinionDifference) minOpinionDifference = odA;
-        //if(odB < minOpinionDifference) minOpinionDifference = odB;
+        if(odB < minOpinionDifference) minOpinionDifference = odB;
 
         if(TRACK_ACTIVITY) {
             a.perturbOpinion(odA, b.getInfluence());
         }
         else {
             a.perturbOpinion(odA);
-            //b.perturbOpinion(odB);
+            b.perturbOpinion(odB);
         }
     }
 
