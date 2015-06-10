@@ -1,3 +1,5 @@
+.project
+.classpath
 data/sim_*
 bin/
 tmp/
