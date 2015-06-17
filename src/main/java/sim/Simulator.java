@@ -68,15 +68,6 @@ public abstract class Simulator {
 		return tOpinionDifference;
 	}
 
-        if(TRACK_ACTIVITY) {
-            a.perturbOpinion(odA, b.getInfluence());
-        }
-        else {
-            a.perturbOpinion(odA);
-            b.perturbOpinion(odB);
-        }
-    }
-
 	public double getMinOpinionDifference() {
 		return minOpinionDifference;
 	}
