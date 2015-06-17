@@ -59,6 +59,16 @@ public class NumClusters extends StatModule {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		System.out.print("Printing out clusters... ");
+		String[][] args = new String[][] {
+				new String[] { "outfile",
+						stats.getDataFolder() + "num_clusters" },
+				new String[] { "infile",
+						stats.getDataFolder() + "num_clusters.dat" },
+				new String[] { "independent", stats.indp.toString() } };
+		Gnuplot.plotFile("num_clusters.plt", args);
+		System.out.println("Done!");
 	}
 
 	@Override
