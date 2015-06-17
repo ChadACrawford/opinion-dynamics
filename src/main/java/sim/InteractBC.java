@@ -12,7 +12,6 @@ public class InteractBC implements Interact {
 		this.MU = MU;
 	}
 
-	@Override
 	public double opinionDiff(Agent a, Agent b) {
 		double oa = a.getOpinion(), ob = b.getOpinion();
 		if (Math.abs(oa - ob) < EPSILON) {
@@ -22,7 +21,6 @@ public class InteractBC implements Interact {
 			return 0.;
 	}
 
-	@Override
 	public IndepedentVariable updateValue(Independent I, double V) {
 		if (I == Independent.EPSILON)
 			return new InteractBC(V, MU);
