@@ -2,6 +2,7 @@ package sim;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -96,14 +97,20 @@ public abstract class NetworkGenerator implements IndepedentVariable {
 		for (int i = 0; i < A.size(); i++) {
 			Agent a = A.get(i);
 			List<Agent> an = N.neighbors(a);
+			List<Agent> rn = new LinkedList<Agent>(); // nn = new
+														// LinkedList<Agent>();
 			for (Agent b : an) {
 				if (rand.nextDouble() < B) {
-					N.remEdge(a, b);
+					// N.remEdge(a, b);
+					rn.add(b);
 					Agent c;
 					while (a == (c = CList.choose(rand, A)) || N.isEdge(a, c))
 						;
-					N.addEdge(a, b);
+					N.addEdge(a, c);
 				}
+			}
+			for (Agent b : rn) {
+				N.remEdge(a, b);
 			}
 		}
 	}
