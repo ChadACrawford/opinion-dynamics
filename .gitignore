@@ -8,3 +8,4 @@ local.properties
 .loadpath
 target/*
 opinion_dynamics.iml
+default.properties
