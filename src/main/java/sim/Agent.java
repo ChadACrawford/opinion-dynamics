@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 public class Agent {
 	private static int AGENT_ID = 0;
-	public static final int id = AGENT_ID++;
+	public final int id = AGENT_ID++;
 	private double opinion = -1;
 	private HashMap<Agent, Double> influence = new HashMap<Agent, Double>();
 
@@ -32,7 +32,8 @@ public class Agent {
 		this.perturbOpinion(opd);
 		double r = opd / (influences.size());
 		for (Agent a : influences.keySet()) {
-			// Updates influence in HashMap if already exists. Otherwise, adds to HashMap.
+			// Updates influence in HashMap if already exists. Otherwise, adds
+			// to HashMap.
 			if (influence.containsKey(a))
 				influence.replace(a, influence.get(a) + r * influences.get(a));
 			else
