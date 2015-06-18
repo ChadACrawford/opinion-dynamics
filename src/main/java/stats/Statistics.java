@@ -20,7 +20,7 @@ import sim.Simulator;
  * Created by Chad on 3/8/15.
  */
 public class Statistics {
-	private String dataFolder;
+	private static String dataFolder;
 	private Driver driver;
 
 	public final Independent indp;
@@ -89,7 +89,7 @@ public class Statistics {
 			m.hookRoundEnd(sim, round);
 	}
 
-	public String getDataFolder() {
+	public static String getDataFolder() {
 		return dataFolder;
 	}
 
@@ -101,6 +101,9 @@ public class Statistics {
 		}
 		if (modules.contains("NUM_CLUSTERS")) {
 			this.addModule(new NumClusters(this));
+		}
+		if (modules.contains("DRAW_NETWORK")) {
+			this.addModule(new NetTopology(this));
 		}
 	}
 }
