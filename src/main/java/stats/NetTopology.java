@@ -46,7 +46,7 @@ public class NetTopology extends StatModule {
 			// create main node
 			Element gefx = doc.createElementNS("http://www.gexf.net/1.2draft",
 					"gexf");
-			gefx.setAttributeNS("viz", "http://www.gexf.net/1.1draft/viz");
+			gefx.setAttributeNS("http://www.gexf.net/1.2draft", "xmlns:viz", "http://www.gexf.net/1.1draft/viz");
 			gefx.setAttribute("version", "1.2");
 			doc.appendChild(gefx);
 
