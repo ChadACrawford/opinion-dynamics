@@ -1,5 +1,9 @@
 package stats;
 
+import sim.Agent;
+import sim.Independent;
+import sim.Simulator;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,10 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import sim.Agent;
-import sim.Independent;
-import sim.Simulator;
 
 /**
  * Created by Chad on 3/9/15.
