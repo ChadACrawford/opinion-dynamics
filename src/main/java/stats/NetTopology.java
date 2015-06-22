@@ -51,24 +51,13 @@ public class NetTopology extends StatModule {
 
     @Override
     public void hookSimulationEnd() {
+        long startTime = System.nanoTime();
         System.out.print("Converting GEXF to PNG... ");
         ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
-
         pc.newProject();
-        Workspace workspace = pc.getCurrentWorkspace();
 
-        AttributeModel attributeModel = Lookup.getDefault().lookup(AttributeController.class).getModel();
         GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
-        PreviewModel model = Lookup.getDefault().lookup(PreviewController.class).getModel();
         ImportController importController = Lookup.getDefault().lookup(ImportController.class);
-        FilterController filterController = Lookup.getDefault().lookup(FilterController.class);
-        RankingController rankingController = Lookup.getDefault().lookup(RankingController.class);
-
-        ForceAtlas2 forceAtlas2 = new ForceAtlas2(new ForceAtlas2Builder());
-        forceAtlas2.setGraphModel(graphModel);
-        forceAtlas2.setScalingRatio(75.00);
-        forceAtlas2.setAdjustSizes(false);
-        forceAtlas2.setOutboundAttractionDistribution(true);
 
         System.out.println("Began traversing through files.");
         File directory = new File(stats.getDataFolder() + "NetTopology/GEXF");
@@ -76,19 +65,25 @@ public class NetTopology extends StatModule {
         if (directoryListing != null) {
             for (File child : directoryListing) {
                 pc.newProject();
-                workspace = pc.getCurrentWorkspace();
+                Workspace workspace = pc.getCurrentWorkspace();
 
                 //Import file
                 Container container;
                 try {
                     container = importController.importFile(child);
-                    container.getLoader().setEdgeDefault(EdgeDefault.DIRECTED);   //Force DIRECTD
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     return;
                 }
 
                 importController.process(container, new DefaultProcessor(), workspace);
+
+                ForceAtlas2 forceAtlas2 = new ForceAtlas2(new ForceAtlas2Builder());
+                forceAtlas2.setGraphModel(graphModel);
+        /*forceAtlas2.setScalingRatio(75.00);*/
+                forceAtlas2.setAdjustSizes(false);
+                forceAtlas2.setBarnesHutOptimize(true);
+                forceAtlas2.setOutboundAttractionDistribution(true);
 
                 forceAtlas2.initAlgo();
                 for (int i = 0; i < 100 && forceAtlas2.canAlgo(); i++) {
@@ -98,12 +93,12 @@ public class NetTopology extends StatModule {
 
                 ExportController ec = Lookup.getDefault().lookup(ExportController.class);
                 try {
-                    File f = new File(stats.getDataFolder() + "NetTopology/SVG/" + child.getName() + ".png");
-                    String name = f.getName();
+                    String name = child.getName();
                     int pos = name.lastIndexOf(".");
                     if (pos > 0) {
                         name = name.substring(0, pos);
                     }
+                    File f = new File(stats.getDataFolder() + "NetTopology/SVG/" + name + ".png");
                     if (!f.getParentFile().isDirectory()) {
                         f.getParentFile().mkdirs();
                     }
@@ -114,13 +109,10 @@ public class NetTopology extends StatModule {
                 }
 
             }
-        } else {
-            // Handle the case where dir is not really a directory.
-            // Checking dir.isDirectory() above would not be sufficient
-            // to avoid race conditions with another process that deletes
-            // directories.
         }
+        long endTime = System.nanoTime();
         System.out.println("Done!");
+        System.out.println(endTime - startTime);
     }
 
     @Override
