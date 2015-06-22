@@ -1,5 +1,7 @@
 package stats;
 
+import sim.*;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,14 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import sim.Interact;
-import sim.InteractBC;
-import sim.InteractM1;
-import sim.InteractM2;
-import sim.Network;
-import sim.SimNetwork;
-import sim.Simulator;
 
 /**
  * Created by Chad on 3/10/15.
