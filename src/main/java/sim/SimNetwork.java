@@ -1,8 +1,8 @@
 package sim;
 
-import java.util.List;
-
 import cutil.CList;
+
+import java.util.List;
 
 /**
  * Created by Chad on 3/8/15.

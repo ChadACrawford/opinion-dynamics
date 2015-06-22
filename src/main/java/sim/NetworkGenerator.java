@@ -1,12 +1,8 @@
 package sim;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
 import cutil.CList;
+
+import java.util.*;
 
 /**
  * Created by Chad on 2/14/15.
