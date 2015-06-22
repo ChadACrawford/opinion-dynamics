@@ -1,20 +1,16 @@
 package stats;
 
+import sim.Driver;
+import sim.Independent;
+import sim.Simulator;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
-
-import sim.Driver;
-import sim.Independent;
-import sim.Simulator;
+import java.util.*;
 
 /**
  * Created by Chad on 3/8/15.
