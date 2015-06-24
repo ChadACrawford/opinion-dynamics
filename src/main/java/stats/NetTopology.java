@@ -1,8 +1,5 @@
 package stats;
 
-import org.gephi.data.attributes.api.AttributeColumn;
-import org.gephi.data.attributes.api.AttributeController;
-import org.gephi.data.attributes.api.AttributeModel;
 import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.io.exporter.api.ExportController;
@@ -16,7 +13,6 @@ import org.gephi.project.api.Workspace;
 import org.gephi.ranking.api.Ranking;
 import org.gephi.ranking.api.RankingController;
 import org.gephi.ranking.plugin.transformer.AbstractSizeTransformer;
-import org.gephi.statistics.plugin.GraphDistance;
 import org.openide.util.Lookup;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -51,8 +47,7 @@ public class NetTopology extends StatModule {
 
     @Override
     public void hookSimulationEnd() {
-        long startTime = System.nanoTime();
-        System.out.print("Converting GEXF to PDF... ");
+        System.out.println("Converting GEXF to PDF...");
         ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
         pc.newProject();
 
@@ -64,12 +59,10 @@ public class NetTopology extends StatModule {
 
         ImportController importController = Lookup.getDefault().lookup(ImportController.class);
         ExportController ec = Lookup.getDefault().lookup(ExportController.class);
-
-
+        RankingController rankingController = Lookup.getDefault().lookup(RankingController.class);
 
         Container container;
 
-        System.out.println("Began traversing through files.");
         File directory = new File(stats.getDataFolder() + "NetTopology/GEXF");
         File[] directoryListing = directory.listFiles();
         if (directoryListing != null) {
@@ -77,7 +70,6 @@ public class NetTopology extends StatModule {
                 Workspace workspace = pc.getCurrentWorkspace();
                 GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
                 //Import file
-
 
                 try {
                     container = importController.importFile(child);
@@ -101,13 +93,11 @@ public class NetTopology extends StatModule {
                 }
                 forceAtlas2.endAlgo();
 
-                RankingController rankingController = Lookup.getDefault().lookup(RankingController.class);
-
                 Ranking degreeRanking = rankingController.getModel().getRanking(Ranking.NODE_ELEMENT, Ranking.DEGREE_RANKING);
                 AbstractSizeTransformer sizeTransformer = (AbstractSizeTransformer) rankingController.getModel().getTransformer(Ranking.NODE_ELEMENT, org.gephi.ranking.api.Transformer.RENDERABLE_SIZE);
                 sizeTransformer.setMinSize(8);
                 sizeTransformer.setMaxSize(50);
-                rankingController.transform(degreeRanking,sizeTransformer);
+                rankingController.transform(degreeRanking, sizeTransformer);
 
                 try {
                     String name = child.getName();
@@ -126,8 +116,6 @@ public class NetTopology extends StatModule {
             }
 
         }
-        long endTime = System.nanoTime();
-        System.out.println(endTime - startTime);
         System.out.println("Done!");
     }
 
@@ -163,7 +151,7 @@ public class NetTopology extends StatModule {
             Element description = doc.createElement("description");
             description
                     .appendChild(doc
-                            .createTextNode("A graph showing how the agents cluster together and their opinions."));
+                            .createTextNode("A graph showing how the agents cluster together and their opinion values."));
             metadata.appendChild(description);
 
             // enter actual graph
