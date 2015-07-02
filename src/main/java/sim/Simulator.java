@@ -33,7 +33,7 @@ public abstract class Simulator {
 
     public void interact(Agent a, Agent b) {
         /*
-		 * if (Math.abs(0.5 - a.getOpinion()) > Math.abs(0.5 - b.getOpinion()))
+         * if (Math.abs(0.5 - a.getOpinion()) > Math.abs(0.5 - b.getOpinion()))
 		 * { Agent t = b; b = a; a = t; }
 		 */
 
