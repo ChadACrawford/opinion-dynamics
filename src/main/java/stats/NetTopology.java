@@ -1,5 +1,6 @@
 package stats;
 
+import cutil.HelperMethods;
 import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.io.exporter.api.ExportController;
@@ -100,12 +101,7 @@ public class NetTopology extends StatModule {
                 rankingController.transform(degreeRanking, sizeTransformer);
 
                 try {
-                    String name = child.getName();
-                    int pos = name.lastIndexOf(".");
-                    if (pos > 0) {
-                        name = name.substring(0, pos);
-                    }
-                    f = new File(stats.getDataFolder() + "NetTopology/PDF/" + name + ".pdf");
+                    f = new File(stats.getDataFolder() + "NetTopology/PDF/" + HelperMethods.getFileName(child) + ".pdf");
                     ec.exportFile(f);
                 } catch (IOException ex) {
                     ex.printStackTrace();
