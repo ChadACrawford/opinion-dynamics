@@ -98,6 +98,9 @@ public class Statistics {
         if (modules.contains("NUM_CLUSTERS")) {
             this.addModule(new NumClusters(this));
         }
+        if (modules.contains("TIMED_OPINION_DISTRIBUTION")) {
+            this.addModule(new TimedOpinionDistribution(this));
+        }
         if (modules.contains("DRAW_NETWORK")) {
             this.addModule(new NetTopology(this));
         }

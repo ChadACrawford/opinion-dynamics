@@ -1,7 +1,5 @@
 package sim;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import stats.Statistics;
 
 import java.io.File;
@@ -55,38 +53,6 @@ public class Driver {
         }
     }
 
-    private Element getNodes(java.util.List<Agent> agents, Document doc) {
-        Element nodes = doc.createElement("nodes");
-        for (Agent agent : agents) {
-            Element node = doc.createElement("node");
-            node.setAttribute("id", "" + agent.id);
-            Element nodeColor = doc.createElement("viz:color");
-            nodeColor.setAttribute("r", "" + Math.round((agent.getOpinion() * 255)));
-            nodeColor.setAttribute("g", "0");
-            nodeColor.setAttribute("b", "" + Math.round(((1 - agent.getOpinion()) * 255)));
-            node.appendChild(nodeColor);
-            nodes.appendChild(node);
-        }
-        return nodes;
-    }
-
-    private Element getEdges(java.util.List<Agent> agents, Document doc, Network N) {
-        int i = 0;
-        Element edges = doc.createElement("edges");
-
-        for (Agent a : agents) {
-            for (Agent agent : N.neighbors(a)) {
-                Element edge = doc.createElement("edge");
-                edge.setAttribute("id", "" + i);
-                edge.setAttribute("source", "" + a.id);
-                edge.setAttribute("target", "" + agent.id);
-                edges.appendChild(edge);
-                i++;
-            }
-        }
-        return edges;
-    }
-
     public void runTrial(NetworkGenerator ng, Interact i, int trialNum) {
         Network N = ng.generate(NODES);
         Simulator sim = new SimNetwork(i, TRACK_ACTIVITY, seed, N);
@@ -131,6 +97,8 @@ public class Driver {
             indp = Independent.MU;
         else if (propIndp.equals("DEGREE"))
             indp = Independent.DEGREE;
+        else if (propIndp.equals("TIME"))
+            indp = Independent.TIME;
         else
             indp = Independent.NONE;
 
