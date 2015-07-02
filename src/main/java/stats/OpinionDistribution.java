@@ -20,10 +20,9 @@ public class OpinionDistribution extends StatModule {
     private HashMap<Double, Double[]> densities = new HashMap<Double, Double[]>();
     private HashMap<Simulator, Double> sims = new HashMap<Simulator, Double>();
     private HashMap<Double, Integer> frequencies = new HashMap<Double, Integer>();
+
     // number of buckets to place opinions into
     private int B = 101;
-
-    BufferedWriter f;
 
     public OpinionDistribution(Statistics parent) {
         super(parent);
@@ -38,7 +37,7 @@ public class OpinionDistribution extends StatModule {
         System.out.println("Printing out density data...");
         File file = new File(stats.getDataFolder() + "opinion_distribution.dat");
         try {
-            f = new BufferedWriter(new FileWriter(file));
+            BufferedWriter f = new BufferedWriter(new FileWriter(file));
             List<Double> keys = new ArrayList<Double>();
             keys.addAll(densities.keySet());
             Collections.sort(keys);
@@ -60,7 +59,8 @@ public class OpinionDistribution extends StatModule {
                         stats.getDataFolder() + "opinion_distribution"},
                 new String[]{"infile",
                         stats.getDataFolder() + "opinion_distribution.dat"},
-                new String[]{"independent", stats.indp.toString()}};
+                new String[]{"independent", stats.indp.toString()},
+                new String[]{"gname", "Opinion Density"}};
         Gnuplot.plotFile("opinion_distribution.plt", args);
 
         System.out.println("Done!");
@@ -72,9 +72,8 @@ public class OpinionDistribution extends StatModule {
     }
 
     public void updateDistribution(Simulator sim, Double key) {
-        List<Agent> agents = sim.getAgents();
-
         Double[] b;
+
         if (!densities.containsKey(key)) {
             b = new Double[B];
             for (int i = 0; i < B; i++)
@@ -86,19 +85,14 @@ public class OpinionDistribution extends StatModule {
             frequencies.replace(key, frequencies.get(key) + 1);
         }
 
-        for (Agent a : agents) {
-            double o = a.getOpinion();
-            int opPos = (int) Math.round(o * (B - 1));
-            b[opPos]++;
+        for (Agent a : sim.getAgents()) {
+            b[(int) Math.round(a.getOpinion() * (B - 1))]++;
         }
     }
 
     @Override
     public void hookTrialEnd(Simulator sim) {
-        if (stats.indp == Independent.TIME)
-            return;
-        double indpVal = sims.get(sim);
-        updateDistribution(sim, indpVal);
+        updateDistribution(sim, sims.get(sim));
         sims.remove(sim);
     }
 
@@ -108,8 +102,7 @@ public class OpinionDistribution extends StatModule {
 
     @Override
     public void hookRoundEnd(Simulator sim, int round) {
-        if (stats.indp != Independent.TIME)
-            return;
+        if (stats.indp != Independent.TIME) return;
         updateDistribution(sim, (double) round);
     }
 }

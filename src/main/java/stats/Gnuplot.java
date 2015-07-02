@@ -12,7 +12,8 @@ public class Gnuplot {
             String argstring = "";
             for (String[] s : args)
                 argstring += String.format("%s='%s';", s[0], s[1]);
-            String[] command = new String[]{"cmd", "/C", "start", "gnuplot",
+            System.out.println(argstring);
+            String[] command = new String[]{"cmd", "/C", "start", "/B", "gnuplot",
                     "-e", String.format("\"%s\"", argstring),
                     String.format("data/%s", inputFile)};
             // Debug.println(1, Arrays.toString(command));

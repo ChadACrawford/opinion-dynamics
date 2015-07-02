@@ -3,7 +3,7 @@ set terminal png
 
 set output outfile.".png"
 
-set title "Opinion Density"
+set title gtitle
 set xlabel independent
 set ylabel "Opinion value"
 
