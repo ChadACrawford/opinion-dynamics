@@ -1,5 +1,11 @@
+set print "-"
+
 set terminal png
 #set terminal postscript eps enhanced solid "Helvetica" 1
+
+# print independent
+# print infile
+# print outfile
 
 set output outfile.".png"
 

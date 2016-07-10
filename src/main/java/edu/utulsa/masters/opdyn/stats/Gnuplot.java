@@ -1,6 +1,11 @@
 package edu.utulsa.masters.opdyn.stats;
 
+import edu.utulsa.masters.opdyn.sim.Debug;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
 
 /**
  * Helper method for plotting data with Gnuplot. You will need to implement a GNUPlot .plt file in the data/ directory,
@@ -25,7 +30,7 @@ public class Gnuplot {
             else if(isMac())
                 System.err.println("Mac GNUPlot call not implemented. No plots will be produced.");
             else if(isUnix())
-                System.err.println("Unix GNUPlot call not implemented. No plots will be produced.");
+                callGnuplotLinux(inputFile, argstring);
             else
                 System.err.println("OS not supported for GNUPlot call. No plots will be produced.");
         } catch (IOException e) {
@@ -46,6 +51,28 @@ public class Gnuplot {
         };
         //Debug.println(1, Arrays.toString(command));
         rt.exec(command);
+    }
+
+    private static void callGnuplotLinux(String inputFile, String argstring) throws IOException {
+        Runtime rt = Runtime.getRuntime();
+        String[] command = new String[] {
+                "/bin/sh",
+                "-c",
+                "gnuplot -e " + String.format("\"%s\"",argstring)
+                        + " " + String.format("data/%s",inputFile),
+        };
+//        String command1 = "gnuplot -e \"" + argstring + "\" data/" + inputFile + " && pwd";
+        System.out.println(Arrays.toString(command));
+        System.out.println(System.getProperty("user.dir"));
+//        System.out.println(command1);
+        Process p = rt.exec(command);
+        String line;
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(p.getInputStream()) );
+        while ((line = in.readLine()) != null) {
+            System.out.println(line);
+        }
+        in.close();
     }
 
     private static String os = System.getProperty("os.name").toLowerCase();
