@@ -62,8 +62,8 @@ public class Gnuplot {
                         + " " + String.format("data/%s",inputFile),
         };
 //        String command1 = "gnuplot -e \"" + argstring + "\" data/" + inputFile + " && pwd";
-        System.out.println(Arrays.toString(command));
-        System.out.println(System.getProperty("user.dir"));
+//        System.out.println(Arrays.toString(command));
+//        System.out.println(System.getProperty("user.dir"));
 //        System.out.println(command1);
         Process p = rt.exec(command);
         String line;
