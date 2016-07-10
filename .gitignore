@@ -12,7 +12,7 @@ tramp
 .gradle/
 
 # IntelliJ IDEA gitignore
-.idea/
+.idea
 *.iml
 *.iws
 build/
