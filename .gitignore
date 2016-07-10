@@ -1,8 +1,26 @@
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Gradle
+.gradle/
+
+# IntelliJ IDEA gitignore
+.idea/
+*.iml
+*.iws
+build/
+
+# Misc. files
 data/sim_*
 bin/
 tmp/
 .settings/
 local.properties
 .loadpath
-target/*
-opinion_dynamics.iml

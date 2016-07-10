@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+version = '1.0'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile group: 'com.googlecode.efficient-java-matrix-library', name: 'ejml', version: '0.16'
+
+  compile group: 'net.sf.jung', name: 'jung2', version: '2.0.1'
+  compile group: 'net.sf.jung', name: 'jung-graph-impl', version: '2.0.1'
+  compile group: 'net.sf.jung', name: 'jung-api', version: '2.0.1'
+  compile group: 'net.sf.jung', name: 'jung-algorithms', version: '2.0.1'
+}

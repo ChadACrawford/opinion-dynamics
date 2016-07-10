@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/opinion_dynamics.iml" filepath="$PROJECT_DIR$/opinion_dynamics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/opinion-dynamics.iml" filepath="$PROJECT_DIR$/.idea/modules/opinion-dynamics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/opinion-dynamics_main.iml" filepath="$PROJECT_DIR$/.idea/modules/opinion-dynamics_main.iml" group="opinion-dynamics" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/opinion-dynamics_test.iml" filepath="$PROJECT_DIR$/.idea/modules/opinion-dynamics_test.iml" group="opinion-dynamics" />
     </modules>
   </component>
 </project>
-
